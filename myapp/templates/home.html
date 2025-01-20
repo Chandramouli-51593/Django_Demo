@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django App</title>
+</head>
+<body>
+    <h1>Welcome to My Django App</h1>
+    <a href="{% url 'login' %}">
+        <button>Login Page</button>
+    </a>
+    <h1>Live Camera Stream</h1>
+    
+    <div class="container">
+        <button class="btn" id="startBtn">Start Camera</button>
+        <button class="btn" id="stopBtn" style="display:none;">Stop Camera</button>
+        <br>
+        <img id="cameraFeed" width="640" height="480">
+    </div>
+
+    <script>
+        let cameraFeed = document.getElementById("cameraFeed");
+        let startBtn = document.getElementById("startBtn");
+        let stopBtn = document.getElementById("stopBtn");
+
+        startBtn.addEventListener("click", function() {
+            cameraFeed.src = "{% url 'camera' %}";
+            cameraFeed.style.display = "block";
+            startBtn.style.display = "none";
+            stopBtn.style.display = "inline-block";
+        });
+
+        stopBtn.addEventListener("click", function() {
+            cameraFeed.src = "";
+            cameraFeed.style.display = "none";
+            startBtn.style.display = "inline-block";
+            stopBtn.style.display = "none";
+        });
+    </script>
+</body>
+</html>
